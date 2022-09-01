@@ -1,0 +1,52 @@
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 0;
+    width: 90%;
+    margin: 0 auto;
+
+    .left_logo{
+        font-size: 21px;
+        font-weight: 600;
+        cursor: pointer;
+
+        .logo{
+            text-decoration: none;
+            color: #111;
+
+            .fa-store{
+                color: #FF0000;
+                margin-right: 5px;
+            }
+        }
+    }
+
+    .right{
+        display: flex;
+
+        .search{
+            margin-right: 8px;
+
+            #search{
+                padding: 8px;
+                border: 1px solid #FF0000;
+                outline: none;
+            }
+        }
+
+        .cartBtn{
+            padding: 6px 8px;
+            text-decoration: none;
+            color: #111;
+            font-weight: 600;
+            cursor: pointer;
+            border: 1px solid #FF0000;
+
+            .fa-cart-shopping{
+                margin-right: 5px;
+                color: #FF0000;
+            }
+        }
+    }
+}
