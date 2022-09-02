@@ -1,14 +1,20 @@
-<div class="container">
-    <div class="card">
-      <div class="card-header">
-        <img src="" alt="item." />
+<div class="container" *ngIf="show">
+  <div class="card" *ngFor="let item of data">
+    <div class="card-header">
+      <img src={{item?.images[0]}} alt="item." />
+    </div>
+    <div class="card-body">
+      <h4>{{item?.title}}</h4>
+      <p>{{item?.description}}</p>
+      <div class="price">
+        <h4>Price</h4>
+        <p id="price">{{item?.price}}</p>
       </div>
-      <div class="card-body">
-        <h4>khs</h4>
-        <p>m d</p>
+      <div class="navi">
+        <i class="fa-solid fa-square-minus"></i>
+        <span>0</span>
+        <i class="fa-solid fa-square-plus"></i>
       </div>
-      <!-- <a class="item" [routerLink]="['/cart',item.id]">Click to Know More</a> -->
-    </div>    
-
-    <!-- <button (click)="come()">click</button> -->
+    </div>
+  </div>    
 </div>

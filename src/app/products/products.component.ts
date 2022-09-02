@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ProductsListService } from '../services/products-list.service';
+import { CartServiceService } from '../services/cartServices/cart-service.service';
+import { ProductsListService } from '../services/productService/products-list.service';
 
 @Component({
   selector: 'app-products',
@@ -15,7 +16,7 @@ export class ProductsComponent implements OnInit {
   apiData : any
 
 
-  constructor(private prdtlist : ProductsListService) { 
+  constructor(private prdtlist : ProductsListService, private cartService : CartServiceService) { 
     
   }
 
@@ -26,7 +27,6 @@ export class ProductsComponent implements OnInit {
   getData(item : string) : any{
     this.prdtlist.getProduct(item).subscribe((res:any)=>{
       this.apiData = res.products
-      console.log(typeof this.apiData);
     })
   }
 
@@ -40,4 +40,7 @@ export class ProductsComponent implements OnInit {
     }
   }  
 
+  addToCart(x: any){
+    this.cartService.addToCart(x)
+  }
 }

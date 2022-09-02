@@ -9,13 +9,18 @@
   <div class="container" *ngIf="apiData">
       <div class="card" *ngFor="let item of apiData;let i = index">
         <div class="card-header">
-          <img src={{item.images[0]}} alt="item." />
+          <img src={{item?.images[0]}} alt="item." />
         </div>
         <div class="card-body">
-          <h4>{{item.title}}</h4>
-          <p>{{item.description}}</p>
+          <h4>{{item?.title}}</h4>
+          <p>{{item?.description}}</p>
+          <hr>
+          <div class="price">
+            <h4>Price</h4>
+            <p id="price">{{item?.price}}</p>
+          </div>
         </div>
-        <a class="item" [routerLink]="['/cart',item.category,item.id]">Add to Cart</a>
+        <button class="item" (click)="addToCart(item)">Add to Cart</button>
       </div>    
   </div>
 </ng-container>
