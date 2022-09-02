@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ProductsListService } from '../services/products-list.service';
 
 @Component({
@@ -8,37 +8,36 @@ import { ProductsListService } from '../services/products-list.service';
 })
 export class ProductsComponent implements OnInit {
 
+  @Input() searchValue : string = ''
+
   show : boolean = false
   item : string = ''
   apiData : any
-  specificProduct : Array<any> = []
 
-  constructor(private prdtlist : ProductsListService) { }
+
+  constructor(private prdtlist : ProductsListService) { 
+    
+  }
 
   ngOnInit( ): void {
-
   }
+
 
   getData(item : string) : any{
     this.prdtlist.getProduct(item).subscribe((res:any)=>{
-      console.log(res.products);
-      
-      this.apiData = res
-      this.specificProduct = this.apiData.products
-      console.log(this.apiData.products);
+      this.apiData = res.products
+      console.log(typeof this.apiData);
     })
   }
 
   submit(category: string){
-    if(category === 'phone' || category === 'laptop'){
+    if(category === 'smartphones' || category === 'laptops'){
       this.show = true
       this.item = category
       this.getData(this.item);
     }else{
       this.show = false
     }
-  }
-
-  
+  }  
 
 }

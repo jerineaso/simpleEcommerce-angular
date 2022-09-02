@@ -6,16 +6,22 @@ import { Injectable } from '@angular/core';
 })
 export class ProductsListService {
 
-  url : string = 'https://dummyjson.com/products/search?'
+  url : string = 'https://dummyjson.com/products/category'
 
   constructor(private http : HttpClient) { }
 
-  // Get Products
-  getProduct(category: string){
+  // Get all products
+
+  getProduct(item: string){
+    return this.http.get(this.url+'/'+item)
+  }
+
+  // Get Specific Products
+
+  getSpecificProduct(category: string){
     return this.http.get(this.url,{
       params : new HttpParams()
       .set('q',category)
     })
   }
-
 }
