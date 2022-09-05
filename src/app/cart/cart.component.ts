@@ -13,32 +13,42 @@ export class CartComponent implements OnInit {
 
   show : boolean = true
   data : any 
+  quantity : number = 0
+  total : number = 0
 
   constructor(private cartService : CartServiceService) { }
 
   ngOnInit(): void {
 
     this.data = this.cartService.getCartItem()
-    console.log(this.data);
+
     if(this.data.length === 0){
       this.show = false
     }else{
       this.show = true
+      this.totalValue(this.data);
     }
-    
-    // const routeParams = this.route.snapshot.paramMap;
-
-    // this.productIdFromRoute = Number(routeParams.get('itemid'));
-    // const productCatFromRoute = String(routeParams.get('itemCat'));
-    // this.getData(productCatFromRoute);
   }
 
-  getData(item : string) : any{
-    // this.prdtlist.getProduct(item).subscribe((res:any)=>{
-    //   this.apiData = res.products
-    //   this.specificPrdt = this.apiData.find((item:any)=>{
-    //     return item.id === this.productIdFromRoute
-    //   })
-    // })  
+  totalValue(x:any){
+    this.total = x.reduce((prev:any,curr:any)=>{
+      return prev + curr.price
+    })
+
+    console.log(this.total);
+    
+  }
+
+  quantityItem(value : string): void{
+    if(value === "increment"){
+      this.quantity = this.quantity+1
+    }else if(value === "decremenet"){
+      if(this.quantity <= 0){
+        this.quantity = 0
+      }
+      this.quantity = this.quantity-1
+    }else{
+      this.quantity = 0
+    }
   }
 }

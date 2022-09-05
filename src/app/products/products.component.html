@@ -12,7 +12,7 @@
           <img src={{item?.images[0]}} alt="item." />
         </div>
         <div class="card-body">
-          <h4>{{item?.title}}</h4>
+          <h4 class="title">{{item?.title}}</h4>
           <p>{{item?.description}}</p>
           <hr>
           <div class="price">
@@ -20,7 +20,10 @@
             <p id="price">{{item?.price}}</p>
           </div>
         </div>
-        <button class="item" (click)="addToCart(item)">Add to Cart</button>
+        <div class="btn_info">
+          <button class="item" (click)="addToCart(item,i)">Add to Cart</button>
+          <div class="add" *ngIf="addCart">Added to Cart!!...</div>
+        </div>
       </div>    
   </div>
 </ng-container>

@@ -1,20 +1,50 @@
-<div class="container" *ngIf="show">
-  <div class="card" *ngFor="let item of data">
-    <div class="card-header">
-      <img src={{item?.images[0]}} alt="item." />
+<div class="container" >
+  <div class="item_container">
+    <div class="basket-module">
+      <label for="promo-code">Enter a promotional code</label>
+      <input id="promo-code" type="text" name="promo-code" maxlength="5" class="promo-code-field">
+      <button class="promo-code-cta">Apply</button>
     </div>
-    <div class="card-body">
-      <h4>{{item?.title}}</h4>
-      <p>{{item?.description}}</p>
-      <div class="price">
-        <h4>Price</h4>
-        <p id="price">{{item?.price}}</p>
-      </div>
-      <div class="navi">
-        <i class="fa-solid fa-square-minus"></i>
-        <span>0</span>
-        <i class="fa-solid fa-square-plus"></i>
+    <div class="card_container">
+      <div class="card" *ngFor="let item of data">
+        <div class="card-header">
+          <img src={{item?.images[0]}} alt="item." />
+        </div>
+        <div class="card-body">
+          <h4>{{item?.title}}</h4>
+          <p>{{item?.description}}</p>
+          <div class="price">
+            <h4>Price</h4>
+            <p id="price">{{item?.price}}</p>
+          </div>
+          <div class="navi">
+            <button (click)="quantityItem('decrement')">
+              <i class="fa-solid fa-square-minus"></i>
+            </button>
+            <span>{{quantity}}</span>
+            <button (click)="quantityItem('increment')">
+              <i class="fa-solid fa-square-plus"></i>
+            </button>
+          </div>
+        </div>
       </div>
     </div>
-  </div>    
+  </div>
+  <div class="summary_container">
+    <div class="summary-total-items"><span class="total-items"></span> Items in your Bag</div>
+      <div class="summary-subtotal">
+        <div class="subtotal-title">Subtotal</div>
+        <div class="subtotal-value final-value" id="basket-subtotal">130.00</div>
+        <div class="summary-promo hide">
+          <div class="promo-value final-value" id="basket-promo"></div>
+        </div>
+      </div>
+      <div class="summary-total">
+        <div class="total-title">Total</div>
+        <div class="total-value final-value" id="basket-total">130.00</div>
+      </div>
+      <div class="summary-checkout">
+        <button class="checkout-cta">Confirm Checkout</button>
+      </div>
+  </div>
 </div>

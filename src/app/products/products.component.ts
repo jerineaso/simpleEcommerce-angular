@@ -14,6 +14,7 @@ export class ProductsComponent implements OnInit {
   show : boolean = false
   item : string = ''
   apiData : any
+  addCart : boolean = false
 
 
   constructor(private prdtlist : ProductsListService, private cartService : CartServiceService) { 
@@ -40,7 +41,20 @@ export class ProductsComponent implements OnInit {
     }
   }  
 
-  addToCart(x: any){
+  addToCart(x: any, i:number){
+    
+    // console.log(x , "", i);
+    // if(x.id === i){
+    //   this.addCart = true
+    //   setTimeout(()=>{
+    //     this.addCart = false
+    //   },2000)
+    // }else{
+    //   this.addCart = false
+    // }
+    
+    
     this.cartService.addToCart(x)
+
   }
 }
