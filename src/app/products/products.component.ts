@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { CartServiceService } from '../services/cartServices/cart-service.service';
 import { ProductsListService } from '../services/productService/products-list.service';
 
@@ -14,20 +15,27 @@ export class ProductsComponent implements OnInit {
   show : boolean = false
   item : string = ''
   apiData : any
+  search : any
   addCart : boolean = false
 
 
-  constructor(private prdtlist : ProductsListService, private cartService : CartServiceService) { 
+  constructor(private prdtlist : ProductsListService, private cartService : CartServiceService, private route : ActivatedRoute) { 
     
   }
 
   ngOnInit( ): void {
+    const routeParams = this.route.snapshot.paramMap;
+    const searchData = String(routeParams.get('search'));
+    console.log(searchData);
+    
+    this.getData(searchData)
   }
-
-
+    
   getData(item : string) : any{
     this.prdtlist.getProduct(item).subscribe((res:any)=>{
       this.apiData = res.products
+      console.log(this.apiData);
+      
     })
   }
 

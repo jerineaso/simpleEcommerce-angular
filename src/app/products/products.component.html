@@ -5,7 +5,7 @@
     <div class="item" (click)="submit('laptops')"><i class="fa-solid fa-laptop icon"></i>Laptops</div>
 </div>
 
-<ng-container *ngIf="show">
+<ng-container>
   <div class="container" *ngIf="apiData">
       <div class="card" *ngFor="let item of apiData;let i = index">
         <div class="card-header">

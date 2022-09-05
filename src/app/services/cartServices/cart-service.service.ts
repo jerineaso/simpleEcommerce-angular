@@ -12,12 +12,9 @@ export class CartServiceService {
 
   addToCart(x:any){
     this.item.push(x)
-    console.log(this.item);
-    
   }
 
   getCartItem(){
-    console.log(this.item);
     return this.item;    
   }
 }
