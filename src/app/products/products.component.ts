@@ -17,6 +17,10 @@ export class ProductsComponent implements OnInit {
   apiData : any
   search : any
   addCart : boolean = false
+  data : any
+  quantity: number = 0
+  quantitys = "quantity"
+  added = "added"
 
 
   constructor(private prdtlist : ProductsListService, private cartService : CartServiceService, private route : ActivatedRoute) { 
@@ -28,14 +32,26 @@ export class ProductsComponent implements OnInit {
     const searchData = String(routeParams.get('search'));
     console.log(searchData);
     
-    this.getData(searchData)
+    this.getSpecificData(searchData)
   }
-    
+
+  getSpecificData(item: string): any{
+    this.prdtlist.getProduct(item).subscribe((res:any)=>{
+      res.products.forEach((element:any) => {
+        element[this.quantitys] = 1
+        element[this.added] = false
+      });
+      this.apiData = res.products
+    })
+  }  
+
   getData(item : string) : any{
     this.prdtlist.getProduct(item).subscribe((res:any)=>{
+      res.products.forEach((element:any) => {
+        element[this.quantitys] = 1
+        element[this.added] = false
+      });
       this.apiData = res.products
-      console.log(this.apiData);
-      
     })
   }
 
@@ -49,20 +65,25 @@ export class ProductsComponent implements OnInit {
     }
   }  
 
-  addToCart(x: any, i:number){
-    
-    // console.log(x , "", i);
-    // if(x.id === i){
-    //   this.addCart = true
-    //   setTimeout(()=>{
-    //     this.addCart = false
-    //   },2000)
-    // }else{
-    //   this.addCart = false
-    // }
-    
-    
+  addToCart(x: any){
     this.cartService.addToCart(x)
 
+    x.added = true
+    setTimeout(()=>{
+      x.added = false
+    },2000)
+  }
+
+  quantityItem(value : string,item: any): void{
+    this.data = this.apiData.find((val:any)=>{
+      return val.id === item.id
+    })
+    if(value === "increment"){
+      this.data.quantity++;
+    }else if(value === "decrement"){
+      this.data.quantity--;
+    }else{
+      this.data.quantity
+    }
   }
 }

@@ -9,8 +9,6 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent implements OnInit {
 
-  // @Output() value = new EventEmitter<string>();
-
   // Form
   searchData = new FormGroup({
     search: new FormControl('',Validators.required)

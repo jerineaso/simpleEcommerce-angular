@@ -9,13 +9,19 @@ import { ProductsComponent } from './products/products.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
+import { AdminComponent } from './admin/admin.component';
+import { NavigateComponent } from './admin/navigate/navigate.component';
+import { ManipulationComponent } from './admin/manipulation/manipulation.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     CartComponent,
-    ProductsComponent
+    ProductsComponent,
+    AdminComponent,
+    NavigateComponent,
+    ManipulationComponent
   ],
   imports: [
     BrowserModule,

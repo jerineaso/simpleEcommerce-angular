@@ -19,10 +19,19 @@
             <h4>Price</h4>
             <p id="price">{{item?.price}}</p>
           </div>
+          <div class="navi">
+            <button (click)="quantityItem('decrement',item)">
+              <i class="fa-solid fa-square-minus"></i>
+            </button>
+            <span>{{item?.quantity}}</span>
+            <button (click)="quantityItem('increment',item)">
+              <i class="fa-solid fa-square-plus"></i>
+            </button>
+          </div>
         </div>
         <div class="btn_info">
-          <button class="item" (click)="addToCart(item,i)">Add to Cart</button>
-          <div class="add" *ngIf="addCart">Added to Cart!!...</div>
+          <button class="item" (click)="addToCart(item)">Add to Cart</button>
+          <div class="add" *ngIf="item?.added">Added to Cart!!...</div>
         </div>
       </div>    
   </div>

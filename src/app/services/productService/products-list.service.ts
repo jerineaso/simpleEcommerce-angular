@@ -7,6 +7,7 @@ import { Injectable } from '@angular/core';
 export class ProductsListService {
 
   url : string = 'https://dummyjson.com/products/category'
+  seacrUrl :  string = "https://dummyjson.com/products/search?q="
 
   constructor(private http : HttpClient) { }
 
@@ -19,9 +20,6 @@ export class ProductsListService {
   // Get Specific Products
 
   getSpecificProduct(category: string){
-    return this.http.get(this.url,{
-      params : new HttpParams()
-      .set('q',category)
-    })
+    return this.http.get(this.seacrUrl+category)
   }
 }

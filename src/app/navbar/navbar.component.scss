@@ -42,8 +42,9 @@
             font-weight: 600;
             cursor: pointer;
             border: 1px solid #FF0000;
+            margin-left: 5px;
 
-            .fa-cart-shopping{
+            .fa-cart-shopping, .fa-person{
                 margin-right: 5px;
                 color: #FF0000;
             }

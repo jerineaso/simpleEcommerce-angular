@@ -66,6 +66,29 @@
           margin: 0 8px 0;
         }
       }
+      .navi{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        width: 80%;
+        margin: 10px auto 0 auto;
+
+        button{
+          background-color: transparent;
+          outline: none;
+          border: none;
+          .fa-square-minus, .fa-square-plus{
+            font-size: 30px;
+            color: #FF0000;
+            cursor: pointer;
+          }
+        }
+  
+        span{
+          margin: 0 15px;
+        }
+      }
     }
 
     .btn_info{
