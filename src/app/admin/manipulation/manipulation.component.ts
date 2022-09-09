@@ -8,24 +8,32 @@ import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 })
 export class ManipulationComponent implements OnInit {
 
-  addDataForm !: FormGroup;
+  formContainer !: FormGroup
+  addDataForm !: FormArray;
 
   constructor(private fb : FormBuilder) {
   
-    this.addDataForm = this.fb.group({
-      
-    })
-   
    }
 
   ngOnInit(): void {
+    this.formContainer = this.fb.group({
+      addDataForm : this.fb.array([{
+        itemName: '',
+        itemCode : '',
+        itemDescrip : '',
+        itemPrice : '',
+        itemImage : ''
+      }])
+    })
+   
   }
 
+  get admins() {
+    return this.formContainer.controls["addDataForm"] as FormArray;
+  }
 
   onSubmit(){
 
-    console.log(this.addDataForm.value);
-    
-    return this.addDataForm.value
+    console.log(this.formContainer.value);
   }
 }
