@@ -1,33 +1,35 @@
 <div class="mani_container">
     <ng-container>
-        <div class="formContainer" [formGroup]="formContainer">
-            <form formArrayName="addDataForm" id="stripe-login" >
-                <div *ngFor="let item of addDataForm.controls; let i=index">
-                    <div [formGroupName]="i">
-                        <label for="itemName">Item Name</label>
-                        <input type="text" id="itemName" name="itemName" placeholder="Item Name" formControlName="itemName">
-                        <br>
-            
-                        <label for="itemCode">Item Code</label>
-                        <input type="text" id="itemCode" name="itemCode" placeholder="Item Code" formControlName="itemCode">
-                        <br>
-                    
-                        <label for="itemDescrip">Item Description</label>
-                        <textarea name="itemDescrip" id="itemDescrip" cols="30" rows="6" formControlName="itemDescrip"></textarea>
-                        <br>
-                    
-                        <label for="itemPrice">Item Price</label>
-                        <input type="number" id="itemPrice" name="itemPrice" placeholder="Item Price" formControlName="itemPrice">
-                        <br>
-            
-                        <label for="itemImage">Image</label>
-                        <input type="file" id="itemImage" name="itemImage" formControlName="itemImage">
-                        <br>
+        <!-- <div class="formContainer" [formGroup]="formContainer"> -->
+            <form class="formContainer" [formGroup]="formContainer">
+                <div formArrayName="addDataForm" id="stripe-login">
+                    <div *ngFor="let item of data.controls; let i = index">
+                        <div [formGroupName]="i">
+                            <label for="itemName">Item Name</label>
+                            <input type="text" id="itemName" name="itemName" placeholder="Item Name" formControlName="itemName">
+                            <br>
+                
+                            <label for="itemCode">Item Code</label>
+                            <input type="text" id="itemCode" name="itemCode" placeholder="Item Code" formControlName="itemCode">
+                            <br>
                         
-                        <input type="submit" (click)="onSubmit()" value="Add">
+                            <label for="itemDescrip">Item Description</label>
+                            <textarea name="itemDescrip" id="itemDescrip" cols="30" rows="6" formControlName="itemDescrip"></textarea>
+                            <br>
+                        
+                            <label for="itemPrice">Item Price</label>
+                            <input type="number" id="itemPrice" name="itemPrice" placeholder="Item Price" formControlName="itemPrice">
+                            <br>
+                
+                            <label for="itemImage">Image</label>
+                            <input type="file" id="itemImage" name="itemImage" formControlName="itemImage">
+                            <br>
+                            
+                            <input type="submit" (click)="onSubmit()" value="Add">
+                        </div>
                     </div>
                 </div>
             </form>
-        </div>
+        <!-- </div> -->
     </ng-container>
 </div>
