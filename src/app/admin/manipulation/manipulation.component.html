@@ -2,27 +2,32 @@
     <ng-container>
         <form class="formContainer" [formGroup]="formContainer">
             <div formArrayName="addDataForm" id="stripe-login" >
-                <div *ngFor="let item of admins.controls; let i=index">
+                <div *ngFor="let item of itemData.controls; let i=index">
                     <div [formGroupName]="i">
                         <label for="itemName">Item Name</label>
                         <input type="text" id="itemName" name="itemName" placeholder="Item Name" formControlName="itemName">
-                        <br>
+                        <div class="error" *ngIf="itemData.errors?.required">please</div>
+                        <!-- <br> -->
             
                         <label for="itemCode">Item Code</label>
                         <input type="text" id="itemCode" name="itemCode" placeholder="Item Code" formControlName="itemCode">
-                        <br>
+                        <div class="error">please</div>
+                        <!-- <br> -->
                     
                         <label for="itemDescrip">Item Description</label>
-                        <textarea name="itemDescrip" id="itemDescrip" cols="30" rows="6" formControlName="itemDescrip"></textarea>
-                        <br>
+                        <textarea name="itemDescrip" id="itemDescrip" cols="20" rows="3" formControlName="itemDescrip"></textarea>
+                        <div class="error">please</div>
+                        <!-- <br> -->
                     
                         <label for="itemPrice">Item Price</label>
                         <input type="number" id="itemPrice" name="itemPrice" placeholder="Item Price" formControlName="itemPrice">
-                        <br>
+                        <div class="error">please</div>
+                        <!-- <br> -->
             
                         <label for="itemImage">Image</label>
                         <input type="file" id="itemImage" name="itemImage" formControlName="itemImage">
-                        <br>
+                        <div class="error">please</div>
+                        <!-- <br> -->
                         
                         <input type="submit" (click)="onSubmit()" value="Add">
                     </div>
