@@ -12,6 +12,8 @@ import { RouterModule } from '@angular/router';
 import { AdminComponent } from './admin/admin.component';
 import { NavigateComponent } from './admin/navigate/navigate.component';
 import { ManipulationComponent } from './admin/manipulation/manipulation.component';
+import { CurrencyPipe } from '@angular/common';
+import { ImageCropperModule } from 'ngx-image-cropper';
 
 @NgModule({
   declarations: [
@@ -28,9 +30,10 @@ import { ManipulationComponent } from './admin/manipulation/manipulation.compone
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    RouterModule
+    RouterModule,
+    ImageCropperModule
   ],
-  providers: [],
+  providers: [CurrencyPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

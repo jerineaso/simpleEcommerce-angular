@@ -1,5 +1,82 @@
 <div class="navi_container">
-    <button><i class="fa-solid fa-plus icon"></i>Add Item</button>
-    <button><i class="fa-solid fa-pen-to-square icon"></i>Edit Item</button>
-    <button><i class="fa-solid fa-trash icon"></i>Delete Item</button>
+    <button (click)="toggleBtn()"><i class="fa-solid fa-plus icon"></i>Add Item</button>
+    <button (click)="toggleItem()"><i class="fa-solid fa-pen-to-square icon"></i>Item</button>
 </div>
+
+<ng-container *ngIf="showVar">
+    <div class="mani_container">
+    <form class="formContainer" [formGroup]="formContainer" #myform="ngForm">
+        <div formArrayName="addDataForm" id="stripe-login" >
+            <div *ngFor="let item of itemData.controls; let i=index">
+                <div [formGroupName]="i">
+                    <label for="itemName">Item Name</label>
+                    <input type="text" id="itemName" name="itemName" placeholder="Item Name" formControlName="itemName">
+                    <div class="error" *ngIf="itemData.controls[i].get('itemName')?.invalid && myform.submitted">
+                        <div *ngIf="itemData.controls[i].get('itemName')?.errors?.required">Please enter the item name.</div>
+                        <div *ngIf="itemData.controls[i].get('itemName')?.errors?.pattern">Only characters are allowded.</div>
+                        <div *ngIf="itemData.controls[i].get('itemName')?.errors?.maxlength">Max Length should be within 100 characters.</div>
+                    </div>
+                    <!-- <br> -->
+        
+                    <label for="itemCode">Item Code</label>
+                    <input type="text" id="itemCode" name="itemCode" placeholder="Item Code" formControlName="itemCode">
+                    <div class="error" *ngIf="itemData.controls[i].get('itemCode')?.invalid && myform.submitted">
+                        <div *ngIf="itemData.controls[i].get('itemCode')?.errors?.required">Please enter the item code.</div>
+                        <div *ngIf="itemData.controls[i].get('itemCode')?.errors?.pattern">Allowded only alphanumeric code with max 5 characters</div>
+                    </div>
+                    <!-- <br> -->
+                
+                    <label for="itemDescrip">Item Description</label>
+                    <textarea placeholder="About Item" name="itemDescrip" id="itemDescrip" cols="20" rows="3" formControlName="itemDescrip"></textarea>
+                    <div class="error" *ngIf="itemData.controls[i].get('itemDescrip')?.invalid && myform.submitted">
+                        <div *ngIf="itemData.controls[i].get('itemDescrip')?.errors?.required">Please enter the item description.</div>
+                        <div *ngIf="itemData.controls[i].get('itemDescrip')?.errors?.maxlength">Max Length should be within 500 characters.</div>
+                    </div>
+                    <!-- <br> -->
+                
+                    <label for="itemPrice">Item Price</label>
+                    <input type="number" id="itemPrice" name="itemPrice" placeholder="INR" formControlName="itemPrice">
+                    <div class="error" *ngIf="itemData.controls[i].get('itemPrice')?.errors?.required && myform.submitted">Please enter the item price.</div>
+                    <div class="error" *ngIf="itemData.controls[i].get('itemPrice')?.errors?.max">Max price should be within 10000.</div>
+                    <!-- <br> -->
+        
+                    <label for="itemImage">Image <p>(Accepts only PNG JPG JPEG & less than 5mb)</p></label>
+                    <input type="file" (change)="getFileDetails($event)"  id="itemImage" name="itemImage" formControlName="itemImage" accept="image/x-png,image/gif,image/jpeg">
+                    <div class="error" *ngIf="itemData.controls[i].get('itemImage')?.errors?.required && myform.submitted">Please upload a file!</div>
+                    <div class="error" *ngIf="uploadSize">Upload a file which is less than 5mb</div>
+                    <!-- <br> -->
+                    
+                    <input type="submit" (click)="onSubmit()" value="Add">
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+</ng-container>
+
+<ng-container *ngIf="showItem">
+    <div class="mani_container">
+        <div class="itemDetails" *ngFor="let val of item; let i = index">
+            <div class="item">
+                <h2>Item Name : </h2>
+                <p>{{val.itemName}}</p>
+            </div>
+            <div class="item">
+                <h2>Item Code : </h2>
+                <p>{{val.itemCode}}</p>
+            </div>
+            <div class="item">
+                <h2>Item Description : </h2>
+                <p>{{val.itemDescrip}}</p>
+            </div>
+            <div class="item">
+                <h2>Item Price : </h2>
+                <p>{{val.itemPrice}}</p>
+            </div>
+            <div class="item">
+                <h2>Item Image : </h2>
+                <img src="{{val.itemImage}}" alt="item">
+            </div>
+        </div>
+    </div>
+</ng-container>
