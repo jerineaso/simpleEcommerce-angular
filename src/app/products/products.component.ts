@@ -28,12 +28,17 @@ export class ProductsComponent implements OnInit {
   }
 
   ngOnInit( ): void {
-    const routeParams = this.route.snapshot.paramMap;
-    const searchData = String(routeParams.get('search'));
-    console.log(searchData);
+    // const routeParams = this.route.snapshot.paramMap;
+    // const searchData = String(routeParams.get('search'));
+    // console.log(searchData);
     
-    this.getSpecificData(searchData)
+    // this.getSpecificData(searchData)
   }
+
+  //  routeParams = this.route.snapshot.paramMap;
+  //   searchData = String(this.routeParams.get('search'));
+      
+
 
   getSpecificData(item: string): any{
     this.prdtlist.getProduct(item).subscribe((res:any)=>{
@@ -42,6 +47,8 @@ export class ProductsComponent implements OnInit {
         element[this.added] = false
       });
       this.apiData = res.products
+      console.log(this.apiData);
+      
     })
   }  
 

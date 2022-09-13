@@ -15,6 +15,7 @@ export class NavigateComponent implements OnInit {
   uploadSize : boolean = false
   itemChanged : boolean = false
   btnShow : boolean = false
+  img : boolean = false
   
   formContainer !: FormGroup
   item : any
@@ -84,7 +85,6 @@ export class NavigateComponent implements OnInit {
 
   onSubmit(x: any){ 
 
-    console.log(this.itemData.value[x]);
     
     if(this.itemData.valid){
       this.admin.addItem(this.itemData.value[x]);
@@ -93,7 +93,6 @@ export class NavigateComponent implements OnInit {
       let data = this.createItemData();
       this.itemData.push(data)
 
-      alert("New Item Added")
     }
     
   }
@@ -106,13 +105,24 @@ export class NavigateComponent implements OnInit {
     this.btnShow = false
     const data = (<FormArray>this.formContainer.get('addDataForm')).at(x).value;
 
+    console.log(data);
+    
     this.specData = this.itemData.value.find((item:any)=>{
       return item.itemCode === data.itemCode  
     })
     
     data.itemCode = this.specData.itemCode
+    data.itemName = this.specData.itemName
+    data.itemDescrip = this.specData.itemDescrip
+    data.itemPrice = this.specData.itemPrice
+    data.itemImage = this.specData.itemImage
 
+    console.log(data);
+    
+    this.admin.setItem(data)
     alert("Updated Successfully!!!")
+
+
   }
 
   onDelete(x:number){
@@ -157,6 +167,13 @@ export class NavigateComponent implements OnInit {
 
           let type = event.target.files[i].type;
           let size = event.target.files[i].size;
+          
+          console.log(type);
+          if(type === 'image/jpeg' || type === 'image/png' || type==='image/jpg'){
+            this.img = false
+          }else{
+            this.img = true
+          }
           
         
           let sizeKB = Math.round(size / 1024);

@@ -1,16 +1,16 @@
 <div class="navi_container">
-    <button (click)="toggleBtn()"><i class="fa-solid fa-plus icon"></i>Add Item</button>
+    <button (click)="toggleBtn()"><i class="fa-solid fa-plus icon"></i>Add More</button>
     <button (click)="toggleItem()">See All Items</button>
 </div>
 
 <ng-container *ngIf="showVar">
     <div class="mani_container">
-    <form class="formContainer" [formGroup]="formContainer" #myform="ngForm">
-        <div formArrayName="addDataForm" id="stripe-login" >
+    <form class="formContainer" [formGroup]="formContainer" #myform="ngForm" autocomplete="off">
+        <div formArrayName="addDataForm" id="stripe-login">
             <div *ngFor="let item of itemData.controls; let i=index">
                 <div [formGroupName]="i">
                     <label for="itemName">Item Name</label>
-                    <input type="text" id="itemName" name="itemName" placeholder="Item Name" formControlName="itemName">
+                    <input type="text"  id="itemName" name="itemName" placeholder="Item Name" formControlName="itemName">
                     <div class="error" *ngIf="itemData.controls[i].get('itemName')?.invalid  && itemData.controls[i].get('itemName')?.touched">
                         <div *ngIf="itemData.controls[i].get('itemName')?.errors?.required">Please enter the item name.</div>
                         <div *ngIf="itemData.controls[i].get('itemName')?.errors?.pattern">Only characters are allowded.</div>
@@ -49,7 +49,8 @@
                             <input type="file" id="itemImage" (change)="fileChangeEvent($event)" name="itemImage" formControlName="itemImage" accept="image/x-png,image/gif,image/jpeg" />
                             <div class="error" *ngIf="itemData.controls[i].get('itemImage')?.errors?.required && itemData.controls[i].get('itemImage')?.touched">Please upload a file!</div>
                             <div class="error" *ngIf="uploadSize">Upload a file which is less than 5mb</div> 
-                            <div class="row" *ngIf="itemChanged && !uploadSize" style="margin-top: 10px;">
+                            <div class="error" *ngIf="img">Upload files with extension JPG, JPEG, PNG</div> 
+                            <div class="row" *ngIf="itemChanged && !uploadSize && !img" style="margin-top: 10px;">
                                 <div class="text-center col-md-8">
                                     <h5>Crop Image</h5>
                                     <image-cropper 

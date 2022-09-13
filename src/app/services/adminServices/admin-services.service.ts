@@ -6,6 +6,8 @@ import { Injectable } from '@angular/core';
 export class AdminServicesService {
 
   item : Array<any> = []
+  addedData : Array<any> = []
+  code : any
 
   constructor() { }
 
@@ -15,5 +17,20 @@ export class AdminServicesService {
 
   getItem(){
     return this.item;    
+  }
+
+  setItem(x:any){
+    console.log(x);
+    
+    // this.item.forEach((item:any)=>{
+    //   if(item.itemcode === x.itemcode){
+    //     console.log(item = x);
+    //     item = x
+    //   } 
+    //   return item
+    // })
+
+    this.code = this.item.findIndex((obj => obj.itemCode === x.itemCode))
+    this.item[this.code] = x
   }
 }
