@@ -1,12 +1,11 @@
 .navi_container{
-    min-width: 250px;
+    min-width: 200px;
     border-right: 1px solid #111;
     height: 90vh;
     padding-top: 40px;
     padding-right: 10px;
     display: flex;
     flex-direction: column;
-    // justify-content: space-between;
     text-align : center;
 
     button{
@@ -36,7 +35,6 @@
     z-index: 1;
     left: 20%;
     width: 60%;
-    // transform: translate(-40%,-10%);
 
     form{
         label{
@@ -50,7 +48,7 @@
         }
         }
 
-        input[type=text], select, textarea, input[type=file], input[type=number] {
+        input[type=text], select, textarea, input[type=file], input[type=number]{
             width: 100%;
             padding: 5px 12px;
             margin: 5px 0;
@@ -60,11 +58,11 @@
             box-sizing: border-box;
         }
         
-        input[type=number]{
+        input[type=number]::placeholder{
         text-align: right;
         }
 
-        input[type=submit] {
+        input[type=submit], input[type=button]  {
         width: 100%;
         background-color: transparent;
         color: #111;
@@ -85,6 +83,32 @@
         padding: 3px;
         }
 
+        .card{
+
+            .card-header{
+                font-size: 13px;
+                display: flex;
+                align-items: center;
+
+                p{
+                    font-size: 10px;
+                    margin: 0;
+                }
+            }
+        }
+
+        .btns{
+            display: flex;
+
+            #add{
+                margin-right: 5px;
+            }
+
+            #edit{
+                margin-right: 5px;
+            }
+        }
+
     }
 
     .itemDetails{
@@ -93,11 +117,12 @@
         flex-direction: column;
         text-align: left;
         margin-bottom: 10px;
+        border-bottom: 1px solid #FF0000;
+
 
         .item{
             display: flex;
             align-items: center;
-            border-bottom: 1px solid #FF0000;
 
             h2{
                 font-size: 14px;
@@ -108,6 +133,8 @@
                 margin-left: 5px;
             }
         }
+
+
     }
         
 }

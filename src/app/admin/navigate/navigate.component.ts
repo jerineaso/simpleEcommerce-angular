@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AdminServicesService } from 'src/app/services/adminServices/admin-services.service';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
+import { CartServiceService } from 'src/app/services/cartServices/cart-service.service';
 @Component({
   selector: 'app-navigate',
   templateUrl: './navigate.component.html',
@@ -9,15 +10,20 @@ import { ImageCroppedEvent } from 'ngx-image-cropper';
 })
 export class NavigateComponent implements OnInit {
 
-  showVar: boolean = false;
+  showVar: boolean = true;
   showItem : boolean = false;
+  uploadSize : boolean = false
+  itemChanged : boolean = false
+  btnShow : boolean = false
   
   formContainer !: FormGroup
-  uploadSize : boolean = false
   item : any
   specData : any
+  cartData : any
 
-  constructor(private fb : FormBuilder, private admin : AdminServicesService) { }
+  checkData : any
+
+  constructor(private fb : FormBuilder, private admin : AdminServicesService, private cartServ : CartServiceService) { }
 
   ngOnInit(): void {
   
@@ -27,6 +33,8 @@ export class NavigateComponent implements OnInit {
       )
     })
 
+
+    this.cartData = this.cartServ.getCartItem();
   }
 
   toggleBtn(){
@@ -74,26 +82,62 @@ export class NavigateComponent implements OnInit {
     })
   }
 
-  onSubmit(){ 
-    console.log(this.itemData.value[0]);
+  onSubmit(x: any){ 
+
+    console.log(this.itemData.value[x]);
     
-    this.admin.addItem(this.itemData.value[0]);
+    if(this.itemData.valid){
+      this.admin.addItem(this.itemData.value[x]);
+      this.itemChanged = false
+
+      let data = this.createItemData();
+      this.itemData.push(data)
+
+      alert("New Item Added")
+    }
+    
   }
 
-  getFileDetails(e : any){
-    for (let i = 0; i < e.target.files.length; i++) { 
+  onEdit(){
+    this.btnShow = true
+  }
 
-      let type = e.target.files[i].type;
-      let size = e.target.files[i].size;
-      
+  onUpdate(x:any){
+    this.btnShow = false
+    const data = (<FormArray>this.formContainer.get('addDataForm')).at(x).value;
+
+    this.specData = this.itemData.value.find((item:any)=>{
+      return item.itemCode === data.itemCode  
+    })
     
-      let sizeKB = Math.round(size / 1024);
-      console.log(sizeKB);
-      
-      if(sizeKB >= 170){
-        this.uploadSize = true
+    data.itemCode = this.specData.itemCode
+
+    alert("Updated Successfully!!!")
+  }
+
+  onDelete(x:number){
+    console.log(this.cartData);
+    const data = (<FormArray>this.formContainer.get('addDataForm')).at(x).value;
+
+    this.specData = this.itemData.value.find((item:any)=>{
+      return item.itemCode === data.itemCode  
+    })
+
+    this.checkData = this.cartData.find((item:any)=>{
+      return item.brand === this.specData.itemName
+    })
+    
+    if(this.checkData){
+      alert("Can't Delete, Already in the user cart!!!")
+    }else{
+
+      let confirmation = window.confirm("Are you sure want to delete?.");
+
+      if(confirmation){
+        this.itemData.removeAt(x)
+        alert("Successfully Deleted!!...")
       }else{
-        this.uploadSize = false
+        alert("Action Canceled")
       }
 
     }
@@ -105,6 +149,26 @@ export class NavigateComponent implements OnInit {
   
     fileChangeEvent(event: any): void {
         this.imageChangedEvent = event;
+
+        this.itemChanged = true
+
+        // Size
+        for (let i = 0; i < event.target.files.length; i++) { 
+
+          let type = event.target.files[i].type;
+          let size = event.target.files[i].size;
+          
+        
+          let sizeKB = Math.round(size / 1024);
+          console.log(sizeKB);
+          
+          if(sizeKB >= 170){
+            this.uploadSize = true
+          }else{
+            this.uploadSize = false
+          }
+    
+        }
     }
     imageCropped(event: ImageCroppedEvent) {
         this.croppedImage = event.base64;
