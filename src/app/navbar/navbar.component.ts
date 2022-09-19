@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ComponentFactoryResolver } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -14,7 +14,7 @@ export class NavbarComponent implements OnInit {
     search: new FormControl('',Validators.required)
   })
 
-  constructor(private router : Router) { }
+  constructor(private router : Router, private resolver: ComponentFactoryResolver) { }
 
   ngOnInit(): void {
   }
@@ -24,5 +24,7 @@ export class NavbarComponent implements OnInit {
     this.router.navigateByUrl('products/'+this.searchData.value.search)
     this.searchData.reset();
   }
+
+  
 
 }

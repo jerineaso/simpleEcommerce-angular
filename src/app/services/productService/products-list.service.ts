@@ -22,4 +22,5 @@ export class ProductsListService {
   getSpecificProduct(category: string){
     return this.http.get(this.seacrUrl+category)
   }
+  
 }

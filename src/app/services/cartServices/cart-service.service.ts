@@ -15,8 +15,6 @@ export class CartServiceService {
 
   addToCart(x:any){
     this.item.push(x)
-    console.log(this.item);
-    
   }
 
   getCartItem(){
@@ -31,10 +29,6 @@ export class CartServiceService {
   }
 
   removeCartItem(i:number){
-    console.log(this.item);
-
     this.item.splice(i,1)
-    console.log(this.item);
-    
   }
 }

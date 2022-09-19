@@ -1,3 +1,26 @@
+.user{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  #user{
+    margin: 10px 0;
+    font-size: 16px;
+    font-style: italic;
+  }
+
+  #signout{
+    color: #111;
+    padding: 5px;
+    border: 1px solid #FF0000;
+    cursor: pointer;
+    background-color: transparent;
+    font-weight: 600;
+    // font-size: 16px;
+    font-style: italic;
+  }
+}
+
+
 #category{
     margin: 30px 0;
     font-size: 20px;
@@ -27,6 +50,9 @@
   justify-content: space-evenly;
   flex-wrap: wrap;
 
+  .message{
+    margin-top: 15px;
+  }
   .card {
     margin: 10px;
     background-color: #fff;

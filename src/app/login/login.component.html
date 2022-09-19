@@ -1,0 +1,22 @@
+<div class="container">
+    <div class="form-structor">
+        <div class="login slide-up">
+            <div class="center">
+                <h2 class="form-title" id="login"><span>or</span>Log in</h2>
+                <div class="form-holder">
+                    <form action="" [formGroup]="logInForm">
+                        <input type="email" class="input" placeholder="Email" formControlName="email" />
+                        <input type="password" class="input" placeholder="Password" formControlName="password"/>
+                    </form>
+                </div>
+                <div class="error" *ngIf="email?.invalid">
+                 <div class="error" *ngIf="email?.invalid && email?.touched">Please enter the email.</div>
+                </div>
+                <div class="error" *ngIf="password?.invalid && password?.touched">Please enter the password.</div>
+                <div class="error" *ngIf="">Authentication Failed.</div>
+                <a routerLink="/userSignIn" class="submit-btn" (click)="loginAction()">Log In</a>
+                <a routerLink="/userSignUp" class="submit-btn">Register</a>
+            </div>
+        </div>
+    </div>
+</div>

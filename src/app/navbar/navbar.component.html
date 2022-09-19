@@ -5,11 +5,12 @@
     <div class="right">
         <div class="search">
             <form [formGroup]="searchData" (ngSubmit)="onSubmit()">
-                <!-- <input type="text" name="search" id="search" placeholder="Enter product name" formControlName="search"> -->
+                <input type="text" name="search" id="search" placeholder="Enter product name" formControlName="search">
             </form>
         </div>
         <a routerLink="/cart" class="cartBtn"><i class="fa-solid fa-cart-shopping"></i>Cart</a>
         <a routerLink="/admin" class="cartBtn"><i class="fa-solid fa-person"></i>Admin</a>
+        <a routerLink="/userSignUp" class="cartBtn"><i class="fa-solid fa-person"></i>User</a>
     </div>
 </div>
 <hr>

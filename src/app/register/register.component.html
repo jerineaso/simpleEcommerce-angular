@@ -1,0 +1,21 @@
+<div class="container">
+    <div class="form-structor">
+        <div class="login slide-up">
+            <div class="center">
+                <h2 class="form-title" id="login">Register</h2>
+                <div class="form-holder">
+                    <form action="" [formGroup]="registerationForm">
+                        <input type="text" class="input" placeholder="Name" formControlName="name"/>
+                        <input type="text" class="input" placeholder="Mobile" formControlName="mobile"/>
+                        <input type="email" class="input" placeholder="Email" formControlName="email"/>
+                        <input type="password" class="input" placeholder="Password" formControlName="password"/>
+                    </form>
+                </div>
+                <div class="error" *ngIf="email?.invalid && email?.touched">Please enter the email.</div>
+                <div class="error" *ngIf="password?.invalid && password?.touched">Please enter the password.</div>
+                <a routerLink="/userSignUp" class="submit-btn" (click)="register()">Register</a>
+                <a routerLink="/userSignIn" class="submit-btn">Log In</a>
+            </div>
+        </div>
+    </div>
+</div>

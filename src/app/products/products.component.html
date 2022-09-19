@@ -1,3 +1,7 @@
+<div class="user" *ngIf="user">
+  <h2 id="user">Welcome {{user}}</h2>
+  <button id="signout" (click)="signOut()">Sign Out</button>
+</div>
 <h2 id="category">Categories</h2>
 
 <div class="categories_list">
@@ -6,7 +10,8 @@
 </div>
 
 <ng-container>
-  <div class="container" *ngIf="apiData">
+  <div class="container">
+    <div class="message" *ngIf="message">{{message}}</div>
       <div class="card" *ngFor="let item of apiData;let i = index">
         <div class="card-header">
           <img src={{item?.images[0]}} alt="item." />
@@ -36,3 +41,5 @@
       </div>    
   </div>
 </ng-container>
+
+
